@@ -4,13 +4,13 @@ branches:
   - master
 skip_tags: true
 
-build script:
+build_script:
 - cmd: echo Hello World!
 
-test script:
+test_script:
 - cmd: echo This is a test!
 
-on success:
+on_success:
 - cmd: echo Build successfully!
-on failure:
+on_failure:
 - cmd: echo Build Failed!
