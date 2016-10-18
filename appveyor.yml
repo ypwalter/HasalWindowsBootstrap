@@ -1,15 +1,3 @@
 version: 1.0.{build}
 
-branches:
-  only:
-    - master
-    
-skip_tags: true
-
 build: off
-
-before_test:
-- echo "Before Test!"
-
-test_script:
-- echo "Hello World! Test!"
