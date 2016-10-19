@@ -44,7 +44,8 @@ install:
   - cp sikuli*.jar Hasal\thirdParty\
   
   - cd Hasal
-  - %MINICONDA%\python setup.py install
+  - dir %MINICONDA%
+  - %MINICONDA%\python.exe setup.py install
 
 test_script:
   - nosetests
