@@ -45,7 +45,6 @@ install:
   
   - cd Hasal
   - dir %MINICONDA%
-  - %MINICONDA%\python.exe setup.py install
 
 test_script:
   - nosetests
