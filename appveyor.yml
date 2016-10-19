@@ -3,6 +3,8 @@ branches:
   only:
   - master
 skip_tags: true
+skip_commits:
+  message: /SkipCI.*/
 
 cache: opencv_python-2.4.13-cp27-cp27m-win_amd64.whl
 build: false
@@ -23,6 +25,7 @@ install:
   - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy nose"
   - activate test-environment
   - pip install coverage mitmproxy
+  - python platformInfo.py
   - pip install opencv_python-2.4.13-cp27-cp27m-win_amd64.whl
 
 test_script:
