@@ -42,6 +42,12 @@ install:
   - java -jar sikulixsetup-1.1.0.jar options 1.1 2
   - cp runsikuli* Hasal\thirdParty\
   - cp sikuli*.jar Hasal\thirdParty\
+  
+  - dir
+  - cd Hasal\
+  - dir
+  
+  - python setup.py install
 
 test_script:
   - nosetests
