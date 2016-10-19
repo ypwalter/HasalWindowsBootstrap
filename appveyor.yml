@@ -28,6 +28,8 @@ install:
   - set PATH="C:\Program Files\Java\jdk1.7.0\bin";%PATH%
   - curl -kLO https://raw.githubusercontent.com/Mozilla-TWQA/Hasal/master/scripts/cv2_checker.py
   - curl -kLO https://raw.githubusercontent.com/Mozilla-TWQA/Hasal/master/scripts/sys_pkg_checker.py
+  - mkdir media
+  - copy 168_frame.mp4 media
 
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
@@ -56,6 +58,7 @@ test_script:
   - cd Hasal
   - activate test-environment
   - python runtest.py -h
+  - python cv_checker.py
   - cd ..
 
 on_success:
