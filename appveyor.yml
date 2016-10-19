@@ -10,6 +10,8 @@ cache:
   - opencv_python-2.4.13-cp27-cp27m-win32.whl
   - ffmpeg-20160527-git-d970f7b-win32-static.7z
   - sikulixsetup-1.1.0.jar
+  - cv2_checker.py
+  - sys_pkg_checker.py
 build: false
 
 environment:
@@ -24,7 +26,8 @@ install:
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - set PATH="C:\Program Files\7-Zip";%PATH%
   - set PATH="C:\Program Files\Java\jdk1.7.0\bin";%PATH%
-  - curl -kLO https://github.com/Mozilla-TWQA/Hasal/blob/master/scripts/cv2_checker.py  
+  - curl -kLO https://raw.githubusercontent.com/Mozilla-TWQA/Hasal/master/scripts/cv2_checker.py
+  - curl -kLO https://raw.githubusercontent.com/Mozilla-TWQA/Hasal/master/scripts/sys_pkg_checker.py
 
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
@@ -53,7 +56,7 @@ test_script:
   - cd Hasal
   - activate test-environment
   - python runtest.py -h
-  - python cv2_checker.py
+  - python ..\cv2_checker.py
   - cd ..
 
 on_success:
