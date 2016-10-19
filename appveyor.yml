@@ -43,7 +43,8 @@ install:
   - cp runsikuli* Hasal\thirdParty\
   - cp sikuli*.jar Hasal\thirdParty\
   
-  - python Hasal\setup.py install
+  - cd Hasal
+  - %MINICONDA%\python setup.py install
 
 test_script:
   - nosetests
