@@ -31,7 +31,7 @@ install:
   - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy nose"
   - activate test-environment
   
-  - pip install coverage mitmproxy
+  - pip install coverage mitmproxy pywin32
   - pip install opencv_python-2.4.13-cp27-cp27m-win32.whl
   
   - curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
@@ -44,7 +44,7 @@ install:
   - cp sikuli*.jar Hasal\thirdParty\
   
   - cd Hasal
-  - python.exe setup.py install
+  - python setup.py install
   - cd ..
 
 test_script:
