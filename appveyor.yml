@@ -24,7 +24,8 @@ install:
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - set PATH="C:\Program Files\7-Zip";%PATH%
   - set PATH="C:\Program Files\Java\jdk1.7.0\bin";%PATH%
-  
+  - curl -kLO https://github.com/Mozilla-TWQA/Hasal/blob/master/scripts/cv2_checker.py  
+
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
@@ -49,7 +50,9 @@ install:
   - cd ..
 
 test_script:
-  - nosetests
+  - activate test-environment
+  - python runtest.py -h
+  - python cv2_checker.py
 
 on_success:
 - cmd: echo Build successfully!
