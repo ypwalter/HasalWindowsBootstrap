@@ -9,6 +9,7 @@ skip_commits:
 cache:
   - opencv_python-2.4.13-cp27-cp27m-win32.whl
   - ffmpeg-20160527-git-d970f7b-win32-static.7z
+  - sikulixsetup-1.1.0.jar
 build: false
 
 environment:
@@ -22,6 +23,7 @@ init:
 install:
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - set PATH="C:\Program Files\7-Zip";%PATH%
+  - set PATH="C:\Program Files\Java\jdk1.7.0\bin";%PATH%
   
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
@@ -35,6 +37,11 @@ install:
   - curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
   - 7z x ffmpeg-20160527-git-d970f7b-win32-static.7z
   - set PATH="%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\";%PATH%
+  
+  - git clone https://github.com/Mozilla-TWQA/Hasal.git
+  - java -jar sikulixsetup-1.1.0.jar options 1.1 2 3
+  - cp runsikuli* Hasal\thirdParty\
+  - cp sikuli*.jar Hasal\thirdParty\
 
 test_script:
   - nosetests
