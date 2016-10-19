@@ -22,7 +22,6 @@ install:
   - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy nose"
   - activate test-environment
   - pip install coverage mitmproxy
-  - curl -fsS -o opencv.whl http://www.lfd.uci.edu/~gohlke/pythonlibs/dp2ng7en/opencv_python-2.4.13-cp27-cp27m-win_amd64.whl
   - pip install opencv.whl
 
 test_script:
