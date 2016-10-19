@@ -6,7 +6,9 @@ skip_tags: true
 skip_commits:
   message: /SkipCI.*/
 
-cache: opencv_python-2.4.13-cp27-cp27m-win32.whl
+cache:
+  - opencv_python-2.4.13-cp27-cp27m-win32.whl
+  - ffmpeg-20160527-git-d970f7b-win32-static.7z
 build: false
 
 environment:
@@ -19,14 +21,20 @@ init:
 
 install:
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - set PATH="C:\Program Files\7-Zip";%PATH%
+  
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
   - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy nose"
   - activate test-environment
+  
   - pip install coverage mitmproxy
   - pip install opencv_python-2.4.13-cp27-cp27m-win32.whl
-  - systeminfo
+  
+  - curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
+  - 7z x ffmpeg-20160527-git-d970f7b-win32-static.7z
+  - set PATH="%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\";%PATH%
 
 test_script:
   - nosetests
