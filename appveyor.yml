@@ -55,10 +55,10 @@ install:
   - cd ..
 
 test_script:
-  - cd Hasal
   - activate test-environment
-  - python runtest.py -h
   - python cv2_checker.py
+  - cd Hasal
+  - python runtest.py -h
   - cd ..
 
 on_success:
