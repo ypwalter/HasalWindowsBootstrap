@@ -31,7 +31,7 @@ install:
   - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy nose"
   - activate test-environment
   
-  - conda pywin32
+  - conda install pywin32
   - pip install coverage mitmproxy
   - pip install opencv_python-2.4.13-cp27-cp27m-win32.whl
   
