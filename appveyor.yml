@@ -39,7 +39,7 @@ install:
   - set PATH="%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\";%PATH%
   
   - git clone https://github.com/Mozilla-TWQA/Hasal.git
-  - java -jar sikulixsetup-1.1.0.jar options 1.1 2 3
+  - java -jar sikulixsetup-1.1.0.jar options 1.1 2
   - cp runsikuli* Hasal\thirdParty\
   - cp sikuli*.jar Hasal\thirdParty\
 
