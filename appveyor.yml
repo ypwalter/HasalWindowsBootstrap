@@ -58,7 +58,7 @@ test_script:
   - cd Hasal
   - activate test-environment
   - python runtest.py -h
-  - python cv_checker.py
+  - python cv2_checker.py
   - cd ..
 
 on_success:
