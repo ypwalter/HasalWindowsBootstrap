@@ -3,6 +3,10 @@ REM Version: 0.0.1
 
 REM Assuming that you already git pull all the files, we can install curl from the repository
 msiexec /i curl-7.46.0-win32-local.msi /quiet /qn /norestart /log curl.log
+if %ERRORLEVEL% NEQ 0 ( ECHO [FAIL] Curl installation was not finished successfully.
+PING 127.0.0.1 > NUL 2>&1
+EXIT /B 1
+)
 
 REM Print out the time we started this script.
 @echo off
