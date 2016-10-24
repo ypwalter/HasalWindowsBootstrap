@@ -1,13 +1,7 @@
 REM Author: Walter Chen
 REM Version: 0.0.1
 
-REM Assuming that you already git pull all the files, we can install curl from the repository
-msiexec /i curl-7.46.0-win32-local.msi /quiet /qn /norestart /log curl.log
-if %ERRORLEVEL% NEQ 0 ( ECHO [FAIL] Curl installation was not finished successfully.
-PING 127.0.0.1 > NUL 2>&1
-EXIT /B 1
-)
-
+REM Assuming that you already git pull all the files, we can use curl from the repository
 REM Print out the time we started this script.
 @echo off
 for /F "usebackq tokens=1,2 delims==" %%i in (`wmic os get LocalDateTime /VALUE 2^>NUL`) do if '.%%i.'=='.LocalDateTime.' set ldt=%%j
