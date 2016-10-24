@@ -48,21 +48,21 @@ IF %JAVA_HOME%.==. (
 REM Installing 7zip
 curl -kLO http://www.7-zip.org/a/7z1604.exe
 7z1604.exe /S
-SETX /M PATH %PATH%;C:\Program Files\7-Zip
+SETX /M PATH ^%PATH^%;C:\Program Files\7-Zip
 PATH=%PATH%;C:\Program Files\7-Zip
 
 REM Installing Miniconda
 curl -kLO https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86.exe
 Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniconda2\
-SETX /M PATH %PATH%;C:\Miniconda2\Scripts\
+SETX /M PATH ^%PATH^%;C:\Miniconda2\Scripts\
 PATH=%PATH%;C:\Miniconda2\Scripts\
-SETX /M PATH %PATH%;C:\Miniconda2\
+SETX /M PATH ^%PATH^%;C:\Miniconda2\
 PATH=%PATH%;C:\Miniconda2\
 
 REM Configuring Miniconda and Virtualenv
 conda config --set always_yes yes --set changeps1 no
 conda install psutil
-"conda create -q -n hasal-env python=2.7 numpy scipy nose"
+conda create -q -n hasal-env python=2.7 numpy scipy nose
 activate hasal-env
 
 REM Installing winpy32
@@ -77,8 +77,8 @@ pip install opencv_python-2.4.13-cp27-cp27m-win32.whl
 REM Installing ffmpeg
 curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
 7z x ffmpeg-20160527-git-d970f7b-win32-static.7z
-SETX /M PATH %CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%
-PATH="%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\";%PATH%
+ 
+PATH=%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%
 
 REM Installing Sikuli
 java -jar sikulixsetup-1.1.0.jar options 1.1 2
