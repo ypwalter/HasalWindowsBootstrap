@@ -52,16 +52,16 @@ IF %JAVA_HOME%.==. (
 REM Installing 7zip
 curl -kLO http://www.7-zip.org/a/7z1604.exe
 7z1604.exe /S
-SETX /M PATH ^%PATH^%;C:\Program Files\7-Zip
-PATH=%PATH%;C:\Program Files\7-Zip
+SETX /M PATH C:\Program Files\7-Zip;^%PATH^%
+PATH=C:\Program Files\7-Zip;%PATH%
 
 REM Installing Miniconda
 curl -kLO https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86.exe
 Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniconda2\
-SETX /M PATH ^%PATH^%;C:\Miniconda2\Scripts\
-PATH=%PATH%;C:\Miniconda2\Scripts\
-SETX /M PATH ^%PATH^%;C:\Miniconda2\
-PATH=%PATH%;C:\Miniconda2\
+SETX /M PATH C:\Miniconda2\Scripts\;^%PATH^%
+PATH=C:\Miniconda2\Scripts\;%PATH%
+SETX /M PATH C:\Miniconda2\;^%PATH^%
+PATH=C:\Miniconda2\%PATH%
 
 REM Configuring Miniconda and Virtualenv
 conda config --set always_yes yes --set changeps1 no
