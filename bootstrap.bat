@@ -83,8 +83,8 @@ PATH=%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%
 
 REM Installing Sikuli
 java -jar sikulixsetup-1.1.0.jar options 1.1 2
-cp runsikuli* Hasal\thirdParty\
-cp sikuli*.jar Hasal\thirdParty\
+copy runsikuli* Hasal\thirdParty\
+copy sikuli*.jar Hasal\thirdParty\
 
 ::::::::::::::::::::
 ::  Hasal  Setup  ::
