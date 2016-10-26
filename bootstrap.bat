@@ -98,9 +98,9 @@ conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 
 REM Installing firefox
 ECHO [INFO] Downloading Firefox.
-curl -kLO https://ftp.mozilla.org/pub/firefox/releases/48.0.1/win32/zh-TW/Firefox%20Setup%2048.0.1.exe
+curl -kLO https://ftp.mozilla.org/pub/firefox/releases/49.0.1/win32/zh-TW/Firefox%%20Setup%%2049.0.1.exe
 ECHO [INFO] Installing Firefox.
-"Firefox%20Setup%2048.0.1.exe" -ms -ma
+"Firefox%%20Setup%%2049.0.1.exe" -ms -ma
 SETX PATH "C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%" /m
 SET "PATH=C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%"
     
