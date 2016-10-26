@@ -56,7 +56,7 @@ IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] Installing 7Zip.
     7z1604.exe /S
     SETX PATH "C:\Program Files\7-Zip;C:\Program Files (x86)\7-Zip;%PATH%" /m
-    PATH=C:\Program Files\7-Zip;C:\Program Files (x86)\7-Zip;%PATH%
+    SET "PATH=C:\Program Files\7-Zip;C:\Program Files (x86)\7-Zip;%PATH%"
 )
 
 REM Installing ffmpeg
@@ -99,7 +99,7 @@ curl -kLO https://ftp.mozilla.org/pub/firefox/releases/48.0.1/win32/zh-TW/Firefo
 ECHO [INFO] Installing Firefox.
 "Firefox%20Setup%2048.0.1.exe" -ms -ma
 SETX PATH "C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%" /m
-PATH=C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%
+SET "PATH=C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%"
     
 REM Installing chrome
 
