@@ -46,11 +46,18 @@ IF %JAVA_HOME%.==. (
 ::  Installation  ::
 ::::::::::::::::::::
 
-REM Installing 7zip
-curl -kLO http://www.7-zip.org/a/7z1604.exe
-7z1604.exe /S
-SETX PATH "C:\Program Files\7-Zip;%PATH%" /m
-PATH=C:\Program Files\7-Zip;%PATH%
+REM Checking and Installing 7zip
+7z
+IF %ERRORLEVEL% EQU 0 (
+    ECHO [INFO] You already have 7Zip in windows system.
+) ELSE (
+    ECHO [INFO] Downloading 7Zip.
+    curl -kLO http://www.7-zip.org/a/7z1604.exe
+    ECHO [INFO] Installing 7Zip.
+    7z1604.exe /S
+    SETX PATH "C:\Program Files\7-Zip;%PATH%" /m
+    PATH=C:\Program Files\7-Zip;%PATH%
+)
 
 REM Installing ffmpeg
 curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
@@ -64,24 +71,29 @@ copy runsikuli* Hasal\thirdParty\
 copy sikuli*.jar Hasal\thirdParty\
 
 REM Installing Miniconda
-curl -kLO https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86.exe
-Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniconda2\
-SETX PATH "C:\Miniconda2\Scripts\;%PATH%" /m
-SETX PATH "C:\Miniconda2\;%PATH%" /m
-PATH=C:\Miniconda2\Scripts\;%PATH%
-PATH=C:\Miniconda2\;%PATH%
+conda --version
+IF %ERRORLEVEL% EQU 0 (
+    ECHO [INFO] You already have conda in windows system.
+) ELSE (
+    ECHO [INFO] Downloading Miniconda.
+    curl -kLO https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86.exe
+    ECHO [INFO] Installing Miniconda.
+    Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniconda2\
+    SETX PATH "C:\Miniconda2\;C:\Miniconda2\Scripts\;%PATH%" /m
+    PATH=C:\Miniconda2\Scripts\;C:\Miniconda2\;%PATH%
+)
 
 REM Configuring Miniconda and Virtualenv
 conda config --set always_yes yes --set changeps1 no
 conda install psutil
+ECHO [INFO] Creating Miniconda virtualenv (It might take some time to finish.)
 conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 
 ::::::::::::::::::::
 ::  Hasal  Setup  ::
 ::::::::::::::::::::
 
-REM Installing mitmproxy & opencv2
-REM Installing Hasal (hasal-env virtualenv activated in advance)
+REM Installing mitmproxy & opencv2 & Hasal
 activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32.whl & python setup.py install
 
 ::::::::::::::::::::
