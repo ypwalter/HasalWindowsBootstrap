@@ -108,7 +108,7 @@ REM Installing chrome
 ECHO [INFO] Downloading Chrome.
 curl -kLO http://dl.google.com/chrome/install/googlechromestandaloneenterprise.msi
 ECHO [INFO] Installing Chrome.
-msiexec /i "googlechromestandaloneenterprise.msi" /qn /quier /norestart
+msiexec /i "googlechromestandaloneenterprise.msi" /qn /quiet /norestart
 
 ::::::::::::::::::::
 ::  Hasal  Setup  ::
