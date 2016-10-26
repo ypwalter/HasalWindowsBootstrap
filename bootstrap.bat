@@ -94,7 +94,7 @@ conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 ::::::::::::::::::::
 
 REM Installing mitmproxy & opencv2 & Hasal
-activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32.whl & python setup.py install
+activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32.whl & python setup.py install & python cv2_checker.py
 
 ::::::::::::::::::::
 ::    Browsers    ::
