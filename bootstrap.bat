@@ -71,7 +71,7 @@ copy sikuli*.jar thirdParty\
 @echo on
 
 REM Installing Miniconda
-where conda.exe
+where conda.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have conda in windows system.
 ) ELSE (
