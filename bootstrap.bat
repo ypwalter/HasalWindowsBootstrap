@@ -7,14 +7,13 @@ REM Print out the time we started this script.
 for /F "usebackq tokens=1,2 delims==" %%i in (`wmic os get LocalDateTime /VALUE 2^>NUL`) do if '.%%i.'=='.LocalDateTime.' set ldt=%%j
 set ldt=%ldt:~0,4%-%ldt:~4,2%-%ldt:~6,2% %ldt:~8,2%:%ldt:~10,2%:%ldt:~12,6%
 echo [INFO] Current date and time [%ldt%]
-@echo on
 
 ::::::::::::::::::::
 ::  Prerequisite  ::
 ::::::::::::::::::::
 
 REM Checking Administrator Privilege
-@echo off
+
 AT > NUL
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You are Administrator and able to run this script.
@@ -23,14 +22,13 @@ IF %ERRORLEVEL% EQU 0 (
     PING 127.0.0.1 > NUL 2>&1
     EXIT /B 1
 )
-@echo on
 
 ::::::::::::::::::::
 ::  Installation  ::
 ::::::::::::::::::::
 
 REM Checking Java
-@echo off
+
 FOR /f %%j IN ("java.exe") DO (
     SET JAVA_HOME=%%~dp$PATH:j
 )
@@ -44,9 +42,10 @@ IF %JAVA_HOME%.==. (
     ECHO [INFO] Java JDK exists in the environment.
     ECHO JAVA_HOME = %JAVA_HOME%
 )
-@echo on
+
 
 REM Checking and Installing 7zip
+
 where 7z.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have 7Zip in windows system.
@@ -69,6 +68,7 @@ REM Installing Sikuli
 java -jar sikulixsetup-1.1.0.jar options 1.1 2
 copy runsikuli* Hasal\thirdParty\
 copy sikuli*.jar Hasal\thirdParty\
+@echo on
 
 REM Installing Miniconda
 conda --version
