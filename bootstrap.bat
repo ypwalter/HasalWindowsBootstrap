@@ -66,12 +66,12 @@ PATH=%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%
 
 REM Installing Sikuli
 java -jar sikulixsetup-1.1.0.jar options 1.1 2
-copy runsikuli* Hasal\thirdParty\
-copy sikuli*.jar Hasal\thirdParty\
+copy runsikuli* thirdParty\
+copy sikuli*.jar thirdParty\
 @echo on
 
 REM Installing Miniconda
-conda --version
+where conda.exe
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have conda in windows system.
 ) ELSE (
