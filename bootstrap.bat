@@ -90,13 +90,6 @@ ECHO [INFO] Creating Miniconda virtualenv (It might take some time to finish.)
 conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 
 ::::::::::::::::::::
-::  Hasal  Setup  ::
-::::::::::::::::::::
-
-REM Installing mitmproxy & opencv2 & Hasal
-activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32.whl & python setup.py install & python cv2_checker.py
-
-::::::::::::::::::::
 ::    Browsers    ::
 ::::::::::::::::::::
 
@@ -104,6 +97,12 @@ REM Installing chrome
 
 REM Installing firefox
 
+::::::::::::::::::::
+::  Hasal  Setup  ::
+::::::::::::::::::::
+
+REM Installing mitmproxy & opencv2 & Hasal
+activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32.whl & python setup.py install & python cv2_checker.py
 
 ::::::::::::::::::::
 ::    Finished    ::
