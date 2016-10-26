@@ -33,7 +33,7 @@ FOR /f %%j IN ("java.exe") DO (
 
 IF %JAVA_HOME%.==. (
     ECHO [INFO] Downloading Java JDK 7u79.
-    curl -kLO http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-windows-x64.exe
+    curl -L -O -H "Cookie:oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-windows-i586.exe"
     ECHO [INFO] Installing Java JDK 7u79.
     jdk-7u79-windows-x64.exe /s
 ) ELSE (
