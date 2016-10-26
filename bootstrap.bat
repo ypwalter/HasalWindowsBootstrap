@@ -52,29 +52,6 @@ curl -kLO http://www.7-zip.org/a/7z1604.exe
 SETX PATH "C:\Program Files\7-Zip;%PATH%" /m
 PATH=C:\Program Files\7-Zip;%PATH%
 
-REM Installing Miniconda
-curl -kLO https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86.exe
-Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniconda2\
-SETX PATH "C:\Miniconda2\Scripts\;%PATH%" /m
-SETX PATH "C:\Miniconda2\;%PATH%" /m
-PATH=C:\Miniconda2\Scripts\;%PATH%
-PATH=C:\Miniconda2\;%PATH%
-
-REM Configuring Miniconda and Virtualenv
-conda config --set always_yes yes --set changeps1 no
-conda install psutil
-conda create -q -n hasal-env python=2.7 numpy scipy nose
-activate hasal-env
-
-REM Installing winpy32
-conda install pywin32
-
-REM Installing mitmproxy
-pip install mitmproxy
-
-REM Installing opencv2
-pip install opencv_python-2.4.13-cp27-cp27m-win32.whl
-
 REM Installing ffmpeg
 curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
 7z x ffmpeg-20160527-git-d970f7b-win32-static.7z
@@ -86,23 +63,26 @@ java -jar sikulixsetup-1.1.0.jar options 1.1 2
 copy runsikuli* Hasal\thirdParty\
 copy sikuli*.jar Hasal\thirdParty\
 
+REM Installing Miniconda
+curl -kLO https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86.exe
+Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniconda2\
+SETX PATH "C:\Miniconda2\Scripts\;%PATH%" /m
+SETX PATH "C:\Miniconda2\;%PATH%" /m
+PATH=C:\Miniconda2\Scripts\;%PATH%
+PATH=C:\Miniconda2\;%PATH%
+
+REM Configuring Miniconda and Virtualenv
+conda config --set always_yes yes --set changeps1 no
+conda install psutil
+conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
+
 ::::::::::::::::::::
 ::  Hasal  Setup  ::
 ::::::::::::::::::::
 
+REM Installing mitmproxy & opencv2
 REM Installing Hasal (hasal-env virtualenv activated in advance)
-python setup.py install
-
-::::::::::::::::::::
-::    Checking    ::
-::::::::::::::::::::
-
-REM Checking CV2
-python scripts/cv2_checker.py
-
-REM Checking system packages
-python scripts/sys_pkg_checker.py
-
+activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32.whl & python setup.py install
 
 ::::::::::::::::::::
 ::    Browsers    ::
