@@ -59,8 +59,11 @@ IF %ERRORLEVEL% EQU 0 (
 )
 
 REM Installing ffmpeg
+
+ECHO [INFO] Downloading FFMPEG.
 curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
 7z x ffmpeg-20160527-git-d970f7b-win32-static.7z
+ECHO [INFO] Installing FFMPEG.
 SETX PATH "%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%" /m
 PATH=%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%
 
