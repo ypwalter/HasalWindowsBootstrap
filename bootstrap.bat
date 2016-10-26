@@ -35,7 +35,7 @@ IF %JAVA_HOME%.==. (
     ECHO [INFO] Downloading Java JDK 7u79.
     curl -L -O -H "Cookie:oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-windows-i586.exe"
     ECHO [INFO] Installing Java JDK 7u79.
-    jdk-7u79-windows-x64.exe /s
+    jdk-7u79-windows-i586.exe /s
 ) ELSE (
     ECHO [INFO] Java JDK exists in the environment.
     ECHO JAVA_HOME = %JAVA_HOME%
