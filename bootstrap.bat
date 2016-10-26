@@ -25,6 +25,10 @@ IF %ERRORLEVEL% EQU 0 (
 )
 @echo on
 
+::::::::::::::::::::
+::  Installation  ::
+::::::::::::::::::::
+
 REM Checking Java
 @echo off
 FOR /f %%j IN ("java.exe") DO (
@@ -42,12 +46,8 @@ IF %JAVA_HOME%.==. (
 )
 @echo on
 
-::::::::::::::::::::
-::  Installation  ::
-::::::::::::::::::::
-
 REM Checking and Installing 7zip
-7z
+7z > nul
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have 7Zip in windows system.
 ) ELSE (
