@@ -47,7 +47,7 @@ IF %JAVA_HOME%.==. (
 @echo on
 
 REM Checking and Installing 7zip
-7z > nul
+where 7z.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have 7Zip in windows system.
 ) ELSE (
