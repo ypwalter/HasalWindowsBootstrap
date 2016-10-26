@@ -58,7 +58,7 @@ Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S 
 SETX /M PATH C:\Miniconda2\Scripts\;^%PATH^%
 PATH=C:\Miniconda2\Scripts\;%PATH%
 SETX /M PATH C:\Miniconda2\;^%PATH^%
-PATH=C:\Miniconda2\%PATH%
+PATH=C:\Miniconda2\;%PATH%
 
 REM Configuring Miniconda and Virtualenv
 conda config --set always_yes yes --set changeps1 no
