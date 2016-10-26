@@ -80,7 +80,7 @@ IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] Installing Miniconda.
     Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniconda2\
     SETX PATH "C:\Miniconda2\;C:\Miniconda2\Scripts\;%PATH%" /m
-    PATH=C:\Miniconda2\Scripts\;C:\Miniconda2\;%PATH%
+    SET "PATH=C:\Miniconda2\Scripts\;C:\Miniconda2\;%PATH%"
 )
 
 REM Configuring Miniconda and Virtualenv
@@ -116,7 +116,3 @@ activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32
 ::::::::::::::::::::
 
 REM Bootstrap done
-
-
-
-
