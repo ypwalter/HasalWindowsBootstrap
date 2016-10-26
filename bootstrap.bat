@@ -109,6 +109,8 @@ ECHO [INFO] Downloading Chrome.
 curl -kLO http://dl.google.com/chrome/install/googlechromestandaloneenterprise.msi
 ECHO [INFO] Installing Chrome.
 msiexec /i "googlechromestandaloneenterprise.msi" /qn /quiet /norestart
+SETX PATH "C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%" /m
+SET "PATH=C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%"
 
 ::::::::::::::::::::
 ::  Hasal  Setup  ::
