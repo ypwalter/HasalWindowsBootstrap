@@ -117,7 +117,7 @@ SET "PATH=C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Goo
 ::::::::::::::::::::
 
 REM Installing mitmproxy & opencv2 & Hasal
-activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32.whl & python setup.py install & python cv2_checker.py
+activate hasal-env & pip install mitmproxy opencv_python-2.4.13-cp27-cp27m-win32.whl & certutil -p "" mitmproxy-ca-cert.p12 & python setup.py install & python cv2_checker.py
 
 ::::::::::::::::::::
 ::    Finished    ::
