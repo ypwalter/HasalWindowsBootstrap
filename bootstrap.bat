@@ -12,9 +12,7 @@ echo [INFO] Current date and time [%ldt%]
 ::  Prerequisite  ::
 ::::::::::::::::::::
 
-ECHO %PATH%
-
-"SET PATH=%MINICONDA%;%MINICONDA%\Scripts;%PATH%"
+SET PATH=%MINICONDA%;%MINICONDA%\Scripts;%PATH%
 
 REM Checking Administrator Privilege
 
