@@ -14,6 +14,9 @@ echo [INFO] Current date and time [%ldt%]
 
 REM Checking Administrator Privilege
 
+REM If in appveyor, skip download and installation.
+IF /i "%APPVEYOR%"=="True" goto NoAdmin_CI
+
 AT > NUL
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You are Administrator and able to run this script.
@@ -21,6 +24,11 @@ IF %ERRORLEVEL% EQU 0 (
     ECHO [FAIL] You are NOT Administrator. Please rerun with Administrator privilege.
     PING 127.0.0.1 > NUL 2>&1
     EXIT /B 1
+)
+
+:NoAdmin_CI
+IF "%APPVEYOR%"=="True" (
+    ECHO [INFO] Skipping checking of Administrator privilege in CI
 )
 
 ::::::::::::::::::::
