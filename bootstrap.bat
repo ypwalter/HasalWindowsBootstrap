@@ -39,7 +39,7 @@ IF "%APPVEYOR%"=="True" (
 REM Checking Java
 
 REM If in appveyor, skip download and installation.
-IF /i "%APPVEYOR%"=="True" goto Java_CI
+IF /i "%APPVEYOR%"=="True" goto NoJava_CI
 
 REM Trying to download and install Java
 FOR /f %%j IN ("java.exe") DO (
@@ -56,7 +56,7 @@ IF %JAVA_HOME%.==. (
     ECHO JAVA_HOME = %JAVA_HOME%
 )
 
-:Java_CI
+:NoJava_CI
 IF "%APPVEYOR%"=="True" (
     ECHO [INFO] Skipping checking of Java in CI
     SET PATH="C:\Program Files\Java\jdk1.7.0\bin";%PATH%
