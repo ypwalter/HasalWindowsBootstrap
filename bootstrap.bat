@@ -83,16 +83,13 @@ copy sikuli*.jar thirdParty\
 REM Installing Miniconda
 
 REM If in appveyor, set conda path. Or, run where to check if there is conda
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Skipping checking of conda in CI
-    "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
-) ELSE (
-    where conda.exe >nul 2>&1
-)
 
+
+where conda.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have conda in windows system.
 ) ELSE (
+    IF /i "%APPVEYOR%"=="True" goto SkipConda
     ECHO [INFO] Downloading Miniconda.
     thirdParty\curl -kLO https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86.exe
     ECHO [INFO] Installing Miniconda.
@@ -101,6 +98,11 @@ IF %ERRORLEVEL% EQU 0 (
     SET "PATH=C:\Miniconda2\Scripts\;C:\Miniconda2\;%PATH%"
 )
 
+:SkipConda
+IF "%APPVEYOR%"=="True" (
+    ECHO [INFO] Skipping checking of conda in CI
+    "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+)
 
 REM Configuring Miniconda and Virtualenv
 conda config --set always_yes yes --set changeps1 no
@@ -113,7 +115,7 @@ conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 ::::::::::::::::::::
 
 REM If in appveyor, skip download and installation
-IF /i "%APPVEYOR%"=="True" goto SkipBrowser_CI
+IF /i "%APPVEYOR%"=="True" goto NoBro_CI
 
 REM Installing firefox
 ECHO [INFO] Downloading Firefox.
@@ -131,7 +133,7 @@ msiexec /i "googlechromestandaloneenterprise.msi" /qn /quiet /norestart
 SETX PATH "C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%" /m
 SET "PATH=C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%"
 
-SkipBrowser_CI:
+NoBro_CI:
 IF "%APPVEYOR%"=="True" (
     ECHO [INFO] Skipping installation of browser in CI
 )
