@@ -115,7 +115,7 @@ conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 ::::::::::::::::::::
 
 REM If in appveyor, skip download and installation
-IF /i "%APPVEYOR%"=="True" goto NoBro_CI
+IF /i "%APPVEYOR%"=="True" goto NOFF
 
 REM Installing firefox
 ECHO [INFO] Downloading Firefox.
@@ -124,7 +124,10 @@ ECHO [INFO] Installing Firefox.
 "Firefox%%20Setup%%2049.0.1.exe" -ms -ma
 SETX PATH "C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%" /m
 SET "PATH=C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%"
-    
+
+NOFF:
+IF /i "%APPVEYOR%"=="True" goto NOGC
+
 REM Installing chrome
 ECHO [INFO] Downloading Chrome.
 curl -kLO http://dl.google.com/chrome/install/googlechromestandaloneenterprise.msi
@@ -133,7 +136,7 @@ msiexec /i "googlechromestandaloneenterprise.msi" /qn /quiet /norestart
 SETX PATH "C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%" /m
 SET "PATH=C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%"
 
-NoBro_CI:
+NoGC:
 IF "%APPVEYOR%"=="True" (
     ECHO [INFO] Skipping installation of browser in CI
 )
