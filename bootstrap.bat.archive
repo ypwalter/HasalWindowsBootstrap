@@ -27,13 +27,8 @@ IF %ERRORLEVEL% EQU 0 (
 ::  Installation  ::
 ::::::::::::::::::::
 
-
 REM Checking Java
 
-REM If in appveyor, skip download and installation.
-IF /i "%APPVEYOR%"=="True" goto Java_CI
-
-REM Trying to download and install Java
 FOR /f %%j IN ("java.exe") DO (
     SET JAVA_HOME=%%~dp$PATH:j
 )
@@ -48,19 +43,9 @@ IF %JAVA_HOME%.==. (
     ECHO JAVA_HOME = %JAVA_HOME%
 )
 
-:Java_CI
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Skipping checking of Java in CI
-    SET PATH="C:\Program Files\Java\jdk1.7.0\bin";%PATH%
-)
-
 
 REM Checking and Installing 7zip
 
-REM If in appveyor, skip download and installation.
-IF /i "%APPVEYOR%"=="True" goto 7zip_CI
-
-REM Trying to download and install 7zip
 where 7z.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have 7Zip in windows system.
@@ -73,13 +58,6 @@ IF %ERRORLEVEL% EQU 0 (
     SET "PATH=C:\Program Files\7-Zip;C:\Program Files (x86)\7-Zip;%PATH%"
 )
 
-:7zip_CI
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Skipping checking of 7zip in CI
-    SET "PATH=C:\Program Files\7-Zip;%PATH%"
-)
-
-
 REM Installing ffmpeg
 
 ECHO [INFO] Downloading FFMPEG.
@@ -88,7 +66,6 @@ thirdParty\curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160
 ECHO [INFO] Installing FFMPEG.
 SETX PATH "%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%" /m
 PATH=%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%
-
 
 REM Installing Sikuli
 ECHO [INFO] Downloading SikuliX 1.1.0
@@ -99,12 +76,7 @@ copy runsikuli* thirdParty\
 copy sikuli*.jar thirdParty\
 @echo on
 
-
 REM Installing Miniconda
-
-REM If in appveyor, skip download and installation
-IF /i "%APPVEYOR%"=="True" goto SkipConda_CI
-
 where conda.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have conda in windows system.
@@ -117,13 +89,6 @@ IF %ERRORLEVEL% EQU 0 (
     SET "PATH=C:\Miniconda2\Scripts\;C:\Miniconda2\;%PATH%"
 )
 
-SkipConda_CI:
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Skipping checking of conda in CI
-    "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
-)
-
-
 REM Configuring Miniconda and Virtualenv
 conda config --set always_yes yes --set changeps1 no
 conda install psutil
@@ -133,9 +98,6 @@ conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 ::::::::::::::::::::
 ::    Browsers    ::
 ::::::::::::::::::::
-
-REM If in appveyor, skip download and installation
-IF /i "%APPVEYOR%"=="True" goto SkipBrowser_CI
 
 REM Installing firefox
 ECHO [INFO] Downloading Firefox.
@@ -153,25 +115,12 @@ msiexec /i "googlechromestandaloneenterprise.msi" /qn /quiet /norestart
 SETX PATH "C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%" /m
 SET "PATH=C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%"
 
-SkipBrowser_CI:
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Skipping installation of browser in CI
-)
-
 ::::::::::::::::::::
 ::  Hasal  Setup  ::
 ::::::::::::::::::::
 
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Setup in virtualenv
-    activate hasal-env
-    pip install coverage mitmproxy
-    pip install thirdParty\opencv_python-2.4.13-cp27-cp27m-win32.whl
-    python setup.py install
-) ELSE (
-    REM Installing mitmproxy & opencv2 & Hasal
-    activate hasal-env & pip install mitmproxy thirdParty\opencv_python-2.4.13-cp27-cp27m-win32.whl & certutil -p "" thirdParty\mitmproxy-ca-cert.p12 & python setup.py install & python scripts\cv2_checker.py
-)
+REM Installing mitmproxy & opencv2 & Hasal
+activate hasal-env & pip install mitmproxy thirdParty\opencv_python-2.4.13-cp27-cp27m-win32.whl & certutil -p "" thirdParty\mitmproxy-ca-cert.p12 & python setup.py install & python scripts\cv2_checker.py
 
 ::::::::::::::::::::
 ::    Finished    ::
