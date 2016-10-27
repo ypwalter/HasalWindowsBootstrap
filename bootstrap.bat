@@ -139,6 +139,11 @@ IF NOT "%APPVEYOR%"=="True" (
 ::  Hasal  Setup  ::
 ::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::::::::::::To be taken out.
+git clone https://github.com/Mozilla-TWQA/Hasal.git
+cd hasal
+:::::::::::::::::::::::::::::::::::::::::::::::::::
+
 IF "%APPVEYOR%"=="True" (
     ECHO [INFO] Setup in virtualenv
     activate hasal-env
