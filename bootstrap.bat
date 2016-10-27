@@ -82,13 +82,14 @@ copy sikuli*.jar thirdParty\
 
 REM Installing Miniconda
 
-REM If in appveyor, set conda path
+REM If in appveyor, set conda path. Or, run where to check if there is conda
 IF "%APPVEYOR%"=="True" (
     ECHO [INFO] Skipping checking of conda in CI
     "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+) ELSE (
+    where conda.exe >nul 2>&1
 )
 
-where conda.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have conda in windows system.
 ) ELSE (
