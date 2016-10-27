@@ -12,6 +12,10 @@ echo [INFO] Current date and time [%ldt%]
 ::  Prerequisite  ::
 ::::::::::::::::::::
 
+ECHO %PATH%
+
+"SET PATH=%MINICONDA%;%MINICONDA%\Scripts;%PATH%"
+
 REM Checking Administrator Privilege
 
 REM If in appveyor, skip download and installation.
@@ -102,7 +106,6 @@ IF %ERRORLEVEL% EQU 0 (
 :SkipConda
 IF "%APPVEYOR%"=="True" (
     ECHO [INFO] Skipping checking of conda in CI
-    "SET PATH=%MINICONDA%;%MINICONDA%\Scripts;%PATH%"
 )
 
 REM Configuring Miniconda and Virtualenv
@@ -116,27 +119,22 @@ conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 ::::::::::::::::::::
 
 REM If in appveyor, skip download and installation
-IF "%APPVEYOR%"=="True" GOTO NoBrowser
+IF NOT "%APPVEYOR%"=="True" (
+    REM Installing firefox
+    ECHO [INFO] Downloading Firefox.
+    thirdParty\curl -kLO https://ftp.mozilla.org/pub/firefox/releases/49.0.1/win32/zh-TW/Firefox%%20Setup%%2049.0.1.exe
+    ECHO [INFO] Installing Firefox.
+    "Firefox%%20Setup%%2049.0.1.exe" -ms -ma
+    SETX PATH "C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%" /m
+    SET "PATH=C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%"
 
-REM Installing firefox
-ECHO [INFO] Downloading Firefox.
-thirdParty\curl -kLO https://ftp.mozilla.org/pub/firefox/releases/49.0.1/win32/zh-TW/Firefox%%20Setup%%2049.0.1.exe
-ECHO [INFO] Installing Firefox.
-"Firefox%%20Setup%%2049.0.1.exe" -ms -ma
-SETX PATH "C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%" /m
-SET "PATH=C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%"
-
-REM Installing chrome
-ECHO [INFO] Downloading Chrome.
-curl -kLO http://dl.google.com/chrome/install/googlechromestandaloneenterprise.msi
-ECHO [INFO] Installing Chrome.
-msiexec /i "googlechromestandaloneenterprise.msi" /qn /quiet /norestart
-SETX PATH "C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%" /m
-SET "PATH=C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%"
-
-NoBrowser:
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Skipping installation of browser in CI
+    REM Installing chrome
+    ECHO [INFO] Downloading Chrome.
+    curl -kLO http://dl.google.com/chrome/install/googlechromestandaloneenterprise.msi
+    ECHO [INFO] Installing Chrome.
+    msiexec /i "googlechromestandaloneenterprise.msi" /qn /quiet /norestart
+    SETX PATH "C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%" /m
+    SET "PATH=C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%"
 )
 
 ::::::::::::::::::::
