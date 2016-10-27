@@ -82,8 +82,11 @@ copy sikuli*.jar thirdParty\
 
 REM Installing Miniconda
 
-REM If in appveyor, skip download and installation
-IF /i "%APPVEYOR%"=="True" goto SkipConda_CI
+REM If in appveyor, set conda path
+IF "%APPVEYOR%"=="True" (
+    ECHO [INFO] Skipping checking of conda in CI
+    "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+)
 
 where conda.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
@@ -95,12 +98,6 @@ IF %ERRORLEVEL% EQU 0 (
     Miniconda2-latest-Windows-x86.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniconda2\
     SETX PATH "C:\Miniconda2\;C:\Miniconda2\Scripts\;%PATH%" /m
     SET "PATH=C:\Miniconda2\Scripts\;C:\Miniconda2\;%PATH%"
-)
-
-SkipConda_CI:
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Skipping checking of conda in CI
-    "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
 )
 
 
