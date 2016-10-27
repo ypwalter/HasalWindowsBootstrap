@@ -17,13 +17,10 @@ init:
   - "ECHO %PYTHON_VERSION% %MINICONDA%"
 
 install:
-  - git clone https://github.com/Mozilla-TWQA/Hasal.git
-  - cd Hasal
   - bootstrap.bat
-  - cd ..
 
 test_script:
-  - activate test-environment
+  - activate hasal-env
   - cd Hasal
   - python scirpts\cv2_checker.py
   - python runtest.py -h
