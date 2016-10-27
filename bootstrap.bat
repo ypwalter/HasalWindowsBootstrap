@@ -15,7 +15,7 @@ echo [INFO] Current date and time [%ldt%]
 REM Checking Administrator Privilege
 
 REM If in appveyor, skip download and installation.
-IF /i "%APPVEYOR%"=="True" goto NoAdmin_CI
+IF "%APPVEYOR%"=="True" goto NoAdmin_CI
 
 AT > NUL
 IF %ERRORLEVEL% EQU 0 (
@@ -38,7 +38,7 @@ IF "%APPVEYOR%"=="True" (
 REM Checking and Installing 7zip
 
 REM If in appveyor, skip download and installation.
-IF /i "%APPVEYOR%"=="True" goto 7zip_CI
+IF "%APPVEYOR%"=="True" goto 7zip_CI
 
 REM Trying to download and install 7zip
 where 7z.exe >nul 2>&1
