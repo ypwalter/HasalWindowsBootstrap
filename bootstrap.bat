@@ -35,33 +35,6 @@ IF "%APPVEYOR%"=="True" (
 ::  Installation  ::
 ::::::::::::::::::::
 
-REM Checking Java
-
-REM If in appveyor, set Java PATH.
-IF "%APPVEYOR%"=="True" (
-    ECHO [INFO] Skipping checking of Java in CI
-    SET PATH="C:\Program Files\Java\jdk1.7.0\bin";%PATH%
-    SET JAVA_HOME="C:\Program Files\Java\jdk1.7.0\bin";
-    GOTO SkipJava_CI
-)
-
-REM Trying to download and install Java
-FOR /f %%j IN ("java.exe") DO (
-    SET JAVA_HOME=%%~dp$PATH:j
-)
-
-:SkipJava_CI
-IF %JAVA_HOME%.==. (
-    ECHO [INFO] Downloading Java JDK 7u79.
-    thirdParty\curl -L -O -H "Cookie:oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-windows-i586.exe"
-    ECHO [INFO] Installing Java JDK 7u79.
-    jdk-7u79-windows-i586.exe /s
-) ELSE (
-    ECHO [INFO] Java JDK exists in the environment.
-    ECHO JAVA_HOME = %JAVA_HOME%
-)
-
-
 REM Checking and Installing 7zip
 
 REM If in appveyor, skip download and installation.
