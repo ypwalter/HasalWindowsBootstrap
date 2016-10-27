@@ -65,11 +65,12 @@ REM Installing ffmpeg
 ECHO [INFO] Downloading FFMPEG.
 thirdParty\curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
 7z x ffmpeg-20160527-git-d970f7b-win32-static.7z
+move /Y ffmpeg-20160527-git-d970f7b-win32-static ffmpeg
 ECHO [INFO] Installing FFMPEG.
 IF NOT "%APPVEYOR%"=="True" (
     SETX PATH "%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%" /m
 )
-PATH=%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%
+PATH=%CD%\ffmpeg\bin\;%PATH%
 
 
 REM Installing Sikuli
@@ -101,7 +102,7 @@ IF %ERRORLEVEL% EQU 0 (
 :SkipConda
 IF "%APPVEYOR%"=="True" (
     ECHO [INFO] Skipping checking of conda in CI
-    "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+    "SET PATH=%MINICONDA%;%MINICONDA%\Scripts;%PATH%"
 )
 
 REM Configuring Miniconda and Virtualenv
@@ -115,7 +116,7 @@ conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 ::::::::::::::::::::
 
 REM If in appveyor, skip download and installation
-IF "%APPVEYOR%"=="True" goto NoBrowser
+IF "%APPVEYOR%"=="True" GOTO NoBrowser
 
 REM Installing firefox
 ECHO [INFO] Downloading Firefox.
