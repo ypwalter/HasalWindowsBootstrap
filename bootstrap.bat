@@ -70,7 +70,7 @@ ECHO [INFO] Installing FFMPEG.
 IF NOT "%APPVEYOR%"=="True" (
     SETX PATH "%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%" /m
 )
-PATH=%CD%\ffmpeg\bin\;%PATH%
+SET PATH=%CD%\ffmpeg\bin\;%PATH%
 
 
 REM Installing Sikuli
