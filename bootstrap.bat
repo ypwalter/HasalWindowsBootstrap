@@ -66,7 +66,9 @@ ECHO [INFO] Downloading FFMPEG.
 thirdParty\curl -kLO https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20160527-git-d970f7b-win32-static.7z
 7z x ffmpeg-20160527-git-d970f7b-win32-static.7z
 ECHO [INFO] Installing FFMPEG.
-SETX PATH "%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%" /m
+IF NOT "%APPVEYOR%"=="True" (
+    SETX PATH "%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%" /m
+)
 PATH=%CD%\ffmpeg-20160527-git-d970f7b-win32-static\bin\;%PATH%
 
 
@@ -82,14 +84,12 @@ copy sikuli*.jar thirdParty\
 
 REM Installing Miniconda
 
-REM If in appveyor, set conda path. Or, run where to check if there is conda
-
+IF "%APPVEYOR%"=="True" GOTO SkipConda
 
 where conda.exe >nul 2>&1
 IF %ERRORLEVEL% EQU 0 (
     ECHO [INFO] You already have conda in windows system.
 ) ELSE (
-    IF /i "%APPVEYOR%"=="True" goto SkipConda
     ECHO [INFO] Downloading Miniconda.
     thirdParty\curl -kLO https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86.exe
     ECHO [INFO] Installing Miniconda.
@@ -115,7 +115,7 @@ conda create -q -n hasal-env python=2.7 numpy scipy nose pywin32 pip
 ::::::::::::::::::::
 
 REM If in appveyor, skip download and installation
-IF /i "%APPVEYOR%"=="True" goto NOFF
+IF "%APPVEYOR%"=="True" goto NoBrowser
 
 REM Installing firefox
 ECHO [INFO] Downloading Firefox.
@@ -125,9 +125,6 @@ ECHO [INFO] Installing Firefox.
 SETX PATH "C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%" /m
 SET "PATH=C:\Program Files\Mozilla Firefox;C:\Program Files (x86)\Mozilla Firefox;%PATH%"
 
-NOFF:
-IF /i "%APPVEYOR%"=="True" goto NOGC
-
 REM Installing chrome
 ECHO [INFO] Downloading Chrome.
 curl -kLO http://dl.google.com/chrome/install/googlechromestandaloneenterprise.msi
@@ -136,7 +133,7 @@ msiexec /i "googlechromestandaloneenterprise.msi" /qn /quiet /norestart
 SETX PATH "C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%" /m
 SET "PATH=C:\Program Files\Google\Chrome\Application\;C:\Program Files (x86)\Google\Chrome\Application\;%PATH%"
 
-NoGC:
+NoBrowser:
 IF "%APPVEYOR%"=="True" (
     ECHO [INFO] Skipping installation of browser in CI
 )
