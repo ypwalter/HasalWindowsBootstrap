@@ -21,7 +21,7 @@ install:
 
 test_script:
   - activate hasal-env
-  - python scirpts\cv2_checker.py
+  - python scripts\cv2_checker.py
   - python runtest.py -h
 
 on_success:
